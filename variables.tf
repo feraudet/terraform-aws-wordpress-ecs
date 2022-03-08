@@ -235,6 +235,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "enable_execute_command" {
+  description = "Enable aws ecs execute_command"
+  type        = bool
+  default     = false
+}
+
 locals {
   rds_cluster_engine_version     = var.rds_cluster_engine_version == "" ? data.aws_rds_engine_version.rds_engine_version.version : var.rds_cluster_engine_version
   db_subnet_group_name           = var.db_subnet_group_name == "" ? aws_db_subnet_group.db[0].name : var.db_subnet_group_name

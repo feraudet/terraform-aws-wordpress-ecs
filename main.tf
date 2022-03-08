@@ -121,13 +121,14 @@ resource "aws_ecs_task_definition" "wordpress" {
 }
 
 resource "aws_ecs_service" "wordpress" {
-  name             = var.ecs_service_name
-  cluster          = aws_ecs_cluster.wordpress.arn
-  task_definition  = aws_ecs_task_definition.wordpress.arn
-  desired_count    = var.ecs_service_desired_count
-  launch_type      = "FARGATE"
-  platform_version = "1.4.0"
-  propagate_tags   = "SERVICE"
+  name                   = var.ecs_service_name
+  cluster                = aws_ecs_cluster.wordpress.arn
+  task_definition        = aws_ecs_task_definition.wordpress.arn
+  desired_count          = var.ecs_service_desired_count
+  launch_type            = "FARGATE"
+  platform_version       = "1.4.0"
+  propagate_tags         = "SERVICE"
+  enable_execute_command = var.enable_execute_command
   network_configuration {
     subnets          = var.ecs_service_subnet_ids
     security_groups  = local.ecs_service_security_group_ids
